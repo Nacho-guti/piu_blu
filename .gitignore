@@ -1,0 +1,10 @@
+# Local Netlify folder
+.netlify
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production

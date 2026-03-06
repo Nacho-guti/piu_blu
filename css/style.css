@@ -9,6 +9,13 @@
   padding: 0;
 }
 
+/* Crisp text rendering everywhere */
+* {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 :root {
   --bg:       #ffffff;
   --text:     #111111;
@@ -29,8 +36,6 @@ body {
   color: var(--text);
   font-family: var(--font-body);
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -208,9 +213,10 @@ body {
 }
 
 .hero-tagline {
-  font-family: var(--font-body);
-  font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-  font-weight: 300;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-weight: 400;
+  font-style: italic;
   line-height: 1.8;
   color: var(--text-mid);
   margin-bottom: 3.5rem;
@@ -289,7 +295,7 @@ body {
 
 #scroll-container {
   position: relative;
-  height: 850vh;
+  height: 1000vh;
   z-index: 20;
 }
 
@@ -313,7 +319,6 @@ body {
 
 .align-left {
   justify-content: flex-start;
-  /* Only pad on the outside edge — max-width on inner handles the machine boundary */
   padding: 3vh 0 3vh 5vw;
 }
 
@@ -322,17 +327,21 @@ body {
   padding: 3vh 5vw 3vh 0;
 }
 
-/* Section positioning — midpoint of enter/leave range */
-/* 001: enter=18, leave=32 → mid=25% */
-.scroll-section:nth-child(1) { top: 25%; transform: translateY(-50%); }
-/* 002: enter=34, leave=48 → mid=41% */
-.scroll-section:nth-child(2) { top: 41%; transform: translateY(-50%); }
-/* 003: enter=50, leave=64 → mid=57% */
-.scroll-section:nth-child(3) { top: 57%; transform: translateY(-50%); }
-/* 004: enter=66, leave=80 → mid=73% */
-.scroll-section:nth-child(4) { top: 73%; transform: translateY(-50%); }
-/* 005: enter=84, leave=100 → mid=92% */
-.scroll-section:nth-child(5) { top: 92%; transform: translateY(-50%); }
+/*
+  Section positioning — midpoint of enter/leave range as % of scroll-container height.
+  001: enter=15, leave=27 → mid=21%
+  002: enter=29, leave=41 → mid=35%
+  003: enter=43, leave=55 → mid=49%
+  004: enter=57, leave=69 → mid=63%
+  005: enter=71, leave=82 → mid=76.5%
+  006: enter=85, leave=100 → mid=92.5%
+*/
+.scroll-section:nth-child(1) { top: 21%; transform: translateY(-50%); }
+.scroll-section:nth-child(2) { top: 35%; transform: translateY(-50%); }
+.scroll-section:nth-child(3) { top: 49%; transform: translateY(-50%); }
+.scroll-section:nth-child(4) { top: 63%; transform: translateY(-50%); }
+.scroll-section:nth-child(5) { top: 76.5%; transform: translateY(-50%); }
+.scroll-section:nth-child(6) { top: 92.5%; transform: translateY(-50%); }
 
 .section-inner {
   min-width: 0;
@@ -378,6 +387,48 @@ body {
   font-weight: 300;
   line-height: 1.85;
   color: var(--text-mid);
+}
+
+
+/* ─── MOOD LIST ───────────────────────── */
+
+.mood-list {
+  list-style: none;
+  margin-top: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mood-item {
+  border-top: 1px solid var(--border);
+  padding: 0.7rem 0;
+}
+
+.mood-item:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.mood-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.4vw, 1.5rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.mood-tagline {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-top: 0.2rem;
 }
 
 
@@ -453,7 +504,6 @@ body {
   .align-left .section-inner,
   .align-right .section-inner {
     max-width: 70vw;
-    /* White backdrop so text is readable over the machine */
     background: rgba(255, 255, 255, 0.90);
     padding: 1.8rem 2rem;
     backdrop-filter: blur(6px);
@@ -470,13 +520,14 @@ body {
     font-size: clamp(3rem, 11vw, 4.5rem);
   }
 
-  #scroll-container { height: 600vh; }
+  #scroll-container { height: 700vh; }
 
-  .scroll-section:nth-child(1) { top: 20%; }
-  .scroll-section:nth-child(2) { top: 36%; }
-  .scroll-section:nth-child(3) { top: 52%; }
-  .scroll-section:nth-child(4) { top: 68%; }
-  .scroll-section:nth-child(5) { top: 85%; }
+  .scroll-section:nth-child(1) { top: 17%; }
+  .scroll-section:nth-child(2) { top: 30%; }
+  .scroll-section:nth-child(3) { top: 44%; }
+  .scroll-section:nth-child(4) { top: 57%; }
+  .scroll-section:nth-child(5) { top: 71%; }
+  .scroll-section:nth-child(6) { top: 87%; }
 
   .marquee-text { font-size: clamp(4rem, 14vw, 8rem); }
 }

@@ -43,6 +43,9 @@ function resizeCanvas() {
   canvas.style.width  = w + 'px';
   canvas.style.height = h + 'px';
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  // High-quality scaling for Retina / HiDPI displays
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
   drawFrame(currentFrame);
 }
 
@@ -251,7 +254,7 @@ function initSections() {
     const enter   = parseFloat(section.dataset.enter) / 100;
     const leave   = parseFloat(section.dataset.leave) / 100;
     const targets = section.querySelectorAll(
-      '.section-label, .section-heading, .section-body, .cta-button'
+      '.section-label, .section-heading, .section-body, .mood-list, .cta-button'
     );
 
     let isVisible = false;
